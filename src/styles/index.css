@@ -1,3 +1,8 @@
+body{
+    background-image: url("https://wallpaperaccess.com/full/794.jpg"); 
+    background-size: cover;
+}
+
 .App {
     text-align: center;
     max-width: 400px;
@@ -24,23 +29,12 @@
     border-radius: 4px;
   }
   
-  button {
-    padding: 10px;
-    border: none;
-    background-color: #b6b6b6;
-    color: white;
-    font-size: 16px;
-    cursor: pointer;
-    border-radius: 4px;
-  }
-  
-  button.delete-button {
-    background-color: rgb(253, 118, 118);
-  }
   
   ul {
-    list-style-type: none;
+    
     padding: 0;
+    padding-top: 10px;
+    padding-bottom: 10px;
   }
   
   li {
@@ -48,7 +42,11 @@
     justify-content: space-between;
     align-items: center;
     padding: 10px;
-    border-bottom: 1px solid #ccc;
+    background-color: white;
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-radius: 7px;
+    
   }
   
   .footer {
