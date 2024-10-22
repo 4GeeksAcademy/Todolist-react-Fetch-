@@ -10,49 +10,35 @@ body{
     padding: 20px;
     font-family: Arial, sans-serif;
   }
-  
-  h1 {
-    font-size: 36px;
-    margin-bottom: 20px;
-  }
-  
-  .input-container {
-    display: flex;
-    justify-content: space-between;
-  }
-  
-  input {
-    flex-grow: 1;
-    padding: 10px;
-    margin-right: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-  
-  
-  ul {
-    
-    padding: 0;
-    padding-top: 10px;
-    padding-bottom: 10px;
-  }
-  
-  li {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-    background-color: white;
-    margin-right: 10px;
-    border: 1px solid #ccc;
-    border-radius: 7px;
-    
-  }
-  
-  
 
+button {
+  cursor: pointer;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+.footer {
+  margin-top: 20px;
+}
+
+.task-item .delete-button {
+  display: none;
+}
+
+.task-item:hover .delete-button {
+  display: inline-block;
+}
   
-  .footer {
-    margin-top: 20px;
-  }
+ 
   
