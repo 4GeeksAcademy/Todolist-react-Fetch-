@@ -30,15 +30,15 @@ const App = () => {
           value={task}
           onChange={(e) => setTask(e.target.value)}
           onKeyUp={handleKeyPress}
-          placeholder="What needs to be done?"
+          placeholder="No hay tareas, agrega alguna?"
         />
       </div>
       <ul>
         {tasks.map((task, index) => (
-          <li key={index}>
-            {task}
-            <button className="btn btn-danger" onClick={() => removeTask(index)}><i class="bi bi-trash"></i></button>
-          </li>
+             <li key={index} onMouseEnter={(e) => e.target.classList.add('hover')} onMouseLeave={(e) => e.target.classList.remove('hover')}>
+             {task}
+             <span className="remove-btn btn btn-denger" onClick={() => removeTask(index)}>✖</span>
+         </li>
         ))}
       </ul>
       <div className="footer">
