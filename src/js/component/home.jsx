@@ -1,24 +1,63 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
-'./App.css';
+
+const API_URL = 'https://playground.4geeks.com/todo/todos/Garx1212';
 
 const App = () => {
   const [task, setTask] = useState('');
   const [tasks, setTasks] = useState([]);
 
+  // Fetch tasks when the component mounts
+  useEffect(() => {
+    fetch(API_URL)
+      .then(response => response.json())
+      .then(data => {
+        if (Array.isArray(data)) {
+          setTasks(data);
+        } else {
+          console.error('Fetched data is not an array:', data);
+        }
+      })
+      .catch(error => console.error('Error fetching tasks:', error));
+  }, []);
+
+  // Update tasks on the server
+  const updateTasksOnServer = (newTasks) => {
+    fetch(API_URL, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(newTasks),
+    })
+    .then(response => response.json())
+    .catch(error => console.error('Error updating tasks:', error));
+  };
+
+  // Add a new task
   const addTask = () => {
     if (task) {
       const newTasks = [...tasks, task];
       setTasks(newTasks);
+      updateTasksOnServer(newTasks);
       setTask('');
     }
   };
 
+  // Remove a task
   const removeTask = (index) => {
     const newTasks = tasks.filter((_, i) => i !== index);
     setTasks(newTasks);
+    updateTasksOnServer(newTasks);
   };
 
+  // Clear all tasks
+  const clearTasks = () => {
+    setTasks([]);
+    updateTasksOnServer([]);
+  };
+
+  // Handle key press (Enter) for adding tasks
   const handleKeyPress = (event) => {
     if (event.key === 'Enter') {
       addTask();
@@ -29,7 +68,7 @@ const App = () => {
     <div className="App container">
       <div className="card mt-5">
         <div className="card-body">
-          <h1 className="card-title">Todos</h1>
+          <h1 className="card-title">todos</h1>
           <div className="input-group mb-3">
             <input
               type="text"
@@ -37,11 +76,7 @@ const App = () => {
               value={task}
               onChange={(e) => setTask(e.target.value)}
               onKeyUp={handleKeyPress}
-            
             />
-            <div className="input-group-append">
-              
-            </div>
           </div>
           {tasks.length === 0 ? (
             <p className="card-text">No hay tareas, agrega una</p>
