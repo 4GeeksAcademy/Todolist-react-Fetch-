@@ -1,29 +1,29 @@
 import React, { useState, useEffect } from 'react';
 
 
-const API_URL = 'https://playground.4geeks.com/todo/todos/Garx1212';
+const API = 'https://playground.4geeks.com/todo/todos/Garx1212';
 
 const App = () => {
   const [task, setTask] = useState('');
   const [tasks, setTasks] = useState([]);
 
-  // Fetch tasks when the component mounts
+  
   useEffect(() => {
-    fetch(API_URL)
+    fetch(API)
       .then(response => response.json())
       .then(data => {
         if (Array.isArray(data)) {
           setTasks(data);
         } else {
-          console.error('Fetched data is not an array:', data);
+          console.error('ERROR:', data);
         }
       })
-      .catch(error => console.error('Error fetching tasks:', error));
+      .catch(error => console.error('Error:', error));
   }, []);
 
-  // Update tasks on the server
+  
   const updateTasksOnServer = (newTasks) => {
-    fetch(API_URL, {
+    fetch(API, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -34,7 +34,7 @@ const App = () => {
     .catch(error => console.error('Error updating tasks:', error));
   };
 
-  // Add a new task
+ 
   const addTask = () => {
     if (task) {
       const newTasks = [...tasks, task];
@@ -44,20 +44,16 @@ const App = () => {
     }
   };
 
-  // Remove a task
+ 
   const removeTask = (index) => {
     const newTasks = tasks.filter((_, i) => i !== index);
     setTasks(newTasks);
     updateTasksOnServer(newTasks);
   };
 
-  // Clear all tasks
-  const clearTasks = () => {
-    setTasks([]);
-    updateTasksOnServer([]);
-  };
 
-  // Handle key press (Enter) for adding tasks
+
+ 
   const handleKeyPress = (event) => {
     if (event.key === 'Enter') {
       addTask();
