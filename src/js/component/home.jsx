@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 
 
-const API = 'https://playground.4geeks.com/todo/todos/Garx1212';
+const API = 'https://playground.4geeks.com/todo/users/Garx1212';
 
 const App = () => {
   const [task, setTask] = useState('');
@@ -15,7 +15,7 @@ const App = () => {
         if (Array.isArray(data)) {
           setTasks(data);
         } else {
-          console.error('ERROR:', data);
+         
         }
       })
       .catch(error => console.error('Error:', error));
@@ -23,7 +23,7 @@ const App = () => {
 
   
   const updateTasksOnServer = (newTasks) => {
-    fetch(API, {
+    fetch('https://playground.4geeks.com/todo/todos/36', {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -35,11 +35,11 @@ const App = () => {
   };
 
  
-  const addTask = () => {
+  const addTask = async () => {
     if (task) {
       const newTasks = [...tasks, task];
-      setTasks(newTasks);
-      updateTasksOnServer(newTasks);
+      await setTasks(newTasks);
+      await updateTasksOnServer(newTasks);
       setTask('');
     }
   };
